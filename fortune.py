@@ -1,4 +1,4 @@
-# fortune.py
+# fortune.py (Version v1.1)
 
 import random
 
@@ -33,26 +33,50 @@ def get_fortune(mood):
             "📚 Maybe today is the perfect day to start something new!",
             "🎨 Creativity often starts with boredom. What will you create today?",
             "🧩 A hidden adventure awaits, Lakshay — look around carefully!"
+        ],
+        "angry": [
+            "🔥 Let your anger fuel positive change, Lakshay!",
+            "🌪️ Storms don't last forever. Calm skies are coming.",
+            "🛡️ Stay strong — patience will reward you."
+        ],
+        "confused": [
+            "🧭 Even when lost, you are finding a new path, Lakshay.",
+            "🧩 Pieces will soon fit together. Trust the process!",
+            "🌟 Not knowing everything is part of the adventure."
+        ],
+        "grateful": [
+            "💖 Gratitude multiplies joy, Lakshay! You are blessed.",
+            "🌸 Thankfulness brings more reasons to smile!",
+            "🌞 The universe notices your positive energy!"
         ]
     }
 
-    return random.choice(fortunes.get(mood, [
+    default_fortunes = [
         "✨ Embrace the unknown, Lakshay. Exciting things are ahead! ✨",
         "🌟 The stars are aligning in your favor. Trust the journey!"
-    ]))
+    ]
+
+    return random.choice(fortunes.get(mood, default_fortunes))
 
 def main():
-    print("🔮 Welcome to Lakshay's Fortune Teller (21JE0502) 🔮")
-    print("=" * 60)
+    print("\n🔮🔮🔮 Welcome to Lakshay's Fortune Teller (21JE0502) 🔮🔮🔮")
+    print("=" * 65)
+
+    available_moods = ["happy", "sad", "neutral", "stressed", "excited", "bored", "angry", "confused", "grateful"]
 
     while True:
-        mood = input("How are you feeling today? (happy/sad/neutral/stressed/excited/bored): ").strip().lower()
+        mood = input(f"\nHow are you feeling today? ({'/'.join(available_moods)}): ").strip().lower()
+
+        if mood not in available_moods:
+            print(f"⚠️ Oops! '{mood}' is not recognized. Please choose from: {', '.join(available_moods)}")
+            continue
+
         fortune = get_fortune(mood)
         print("\n" + fortune + "\n")
 
         retry = input("Would you like another fortune? (yes/no): ").strip().lower()
         if retry != 'yes':
-            print("\n🌟 Thank you for visiting Lakshay's Fortune Teller. Have a magical day! 🌟")
+            print("\n🌟 Thank you for visiting Lakshay's Fortune Teller. May your future be bright! 🌟\n")
             break
 
 if __name__ == "__main__":
