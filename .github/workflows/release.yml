@@ -1,0 +1,19 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'   # This means v1.0, v1.1, v2.0 etc
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: fortune.py
